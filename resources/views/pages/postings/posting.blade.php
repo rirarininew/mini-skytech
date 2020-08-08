@@ -11,12 +11,12 @@
           </div>
 
           @if (session('success'))
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div class="alert alert-success">{{ session('success') }}</div>
             </div>
           @endif
           @if (session('error'))
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div class="alert alert-danger">{{ session('error') }}</div>
             </div>
           @endif
@@ -103,8 +103,8 @@
                     Actions
                   </th>
                 </thead>
+                @if(Auth::user()->id == 1)
                 @foreach($data_posting as $o)
-                @if($o->user_id == Auth::user()->id)
                 <tbody>
                   <tr>
                     <td>
@@ -126,7 +126,9 @@
                       {{ $o->status }}
                     </td class="text-success">
                     <td>
+                      <a href="{{ route('posting.detail', $o->post_id)}}">
                       <img width="100px" src="{{ url('/data_image/'.$o->photo) }}">
+                      </a>
                     </td>
                     <td class="td-actions">
                       <a href="{{ route('posting.edit', $o->post_id)}}" class="btn btn-success btn-link btn-sm">
@@ -138,8 +140,48 @@
                     </td>
                   </tr>
                 </tbody>
+                @endforeach
+                @endif
+
+                @if(Auth::user()->id != 1)
+                @foreach($data_posting as $p)
+                @if($p->user_id == Auth::user()->id)
+                <tbody>
+                  <tr>
+                    <td>
+                      {{ $p->created_at }}
+                    </td>
+                    <td>
+                      {{ $p->product_sku }}
+                    </td>
+                    <td>
+                      {{ $p->product_name }}
+                    </td>
+                    <td>
+                      {{ $p->channel_type }}
+                    </td>
+                    <td>
+                      {{ $p->channel_name }}
+                    </td>
+                    <td>
+                      {{ $p->status }}
+                    </td class="text-success">
+                    <td>
+                      <img width="100px" src="{{ url('/data_image/'.$p->photo) }}">
+                    </td>
+                    <td class="td-actions">
+                      <a href="{{ route('posting.edit', $p->post_id)}}" class="btn btn-success btn-link btn-sm">
+                        <i class="material-icons">edit</i>
+                      </a>
+                      <a href="{{ route('posting.delete', $p->post_id)}}" class="btn btn-danger btn-link btn-sm">
+                        <i class="material-icons">close</i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
                 @endif
                 @endforeach
+                @endif
               </table>
             </div>
           </div>

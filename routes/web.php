@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('posting/addposting', 'PostingController@create')->name('posting.create');
 
 	Route::get('posting/editposting/{Post}/edit', 'PostingController@edit')->name ('posting.edit');
+	Route::get('posting/detailposting/{Post}/detail', 'PostingController@detail')->name ('posting.detail');
 	Route::put('posting/postingupdate/{Post}', 'PostingController@update')->name ('posting.update');
 	Route::get('posting/deleteposting/{id}','PostingController@delete')->name ('posting.delete');
 	Route::get('posting/cariposting', 'PostingController@cari')->name ('posting.cari');

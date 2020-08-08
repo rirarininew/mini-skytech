@@ -36,7 +36,7 @@ class UserChart extends BaseChart
         // }, 'Pro')->get();
 
         foreach($daterange as $cdate){
-            $label[]    = $cdate->id;
+            $label[]    = $cdate->name;
             $value[]    = \App\Posting::where('user_id', $cdate->id)->count();
         }
 

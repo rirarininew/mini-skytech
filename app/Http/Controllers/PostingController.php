@@ -105,4 +105,9 @@ class PostingController extends Controller
         return view('pages.postings.posting',['data_posting' => $data_posting]);
     }
 
+    public function detail(Posting $Post)
+    {
+        return view ('pages.postings.detail', compact('Post'));
+    }
+
 }

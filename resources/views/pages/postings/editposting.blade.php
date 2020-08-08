@@ -60,10 +60,16 @@
                 </div>
 
                 <div class="row">
-                  <label class="col-sm-2 col-form-label">{{ __('Channel') }}</label>
+                  <label class="col-sm-2 col-form-label">{{ __('Channel Type') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group">
-                      <input class="form-control" name="channel_type" value="{{ $Post->channel_type }}" type="text"/>
+                      <select class="form-control" name="channel_type">
+                        <option selected="">{{ $Post->channel_type }}</option>
+                        <option value="lazada">Lazada</option>
+                        <option value="tokopedia">Tokopedia</option>
+                        <option value="facebook marketplace">Facebook Marketplace</option>
+                        <option value="forum">Forum</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -72,7 +78,7 @@
                   <label class="col-sm-2 col-form-label">{{ __('Channel Name') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group">
-                      <input class="form-control" name="channel_name" id="input-wholesaleprice" type="text" value="{{ $Post->channel_name }}" disabled="true" />
+                      <input class="form-control" name="channel_name" id="input-wholesaleprice" type="text" value="{{ $Post->channel_name }}" />
                     </div>
                   </div>
                 </div>
@@ -83,8 +89,8 @@
                   <div class="col-sm-7">
                     <div class="form-group">
                       <select class="form-control text-uppercase" value="{{ $Post->channel_city }}" name="channel_city" data-selected="">
-                        @foreach($data_city as $c)
                         <option selected>{{ $Post->channel_city }}</option>
+                        @foreach($data_city as $c)
                         <option value="{{ $c->name }}">{{ $c->name }}</option>
                         @endforeach
                       </select>

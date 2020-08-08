@@ -1,8 +1,11 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => '', 'title' => __('Material Dashboard')])
+@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => '', 'title' => __('Back to Login')])
 
 @section('content')
 <div class="container" style="height: auto;">
   <div class="row align-items-center">
+    <div class="col-md-9 ml-auto mr-auto mb-3 text-center">
+      <br><br><br>
+    </div>
     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
       <form class="form" method="POST" action="{{ route('password.update') }}">
         @csrf

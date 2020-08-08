@@ -1,16 +1,19 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'register', 'title' => __('Material Dashboard')])
+@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'register', 'title' => __('Back to Login')])
 
 @section('content')
 <div class="container" style="height: auto;">
   <div class="row align-items-center">
+    <div class="col-md-9 ml-auto mr-auto mb-3 text-center">
+      <br><br><br>
+    </div>
     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
       <form class="form" method="POST" action="{{ route('register') }}">
         @csrf
 
         <div class="card card-login card-hidden mb-3">
-          <div class="card-header card-header-primary text-center">
+          <div class="card-header card-header-primary text-center" style="padding-bottom:2rem">
             <h4 class="card-title"><strong>{{ __('Register') }}</strong></h4>
-            <div class="social-line">
+            <!-- <div class="social-line">
               <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
                 <i class="fa fa-facebook-square"></i>
               </a>
@@ -20,11 +23,11 @@
               <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
                 <i class="fa fa-google-plus"></i>
               </a>
-            </div>
+            </div> -->
           </div>
           <div class="card-body ">
-            <p class="card-description text-center">{{ __('Or Be Classical') }}</p>
-            <div class="bmd-form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+          
+            <div class="bmd-form-group{{ $errors->has('name') ? ' has-danger' : '' }}" style="padding-top:1rem">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
