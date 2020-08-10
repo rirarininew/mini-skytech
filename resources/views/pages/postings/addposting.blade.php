@@ -42,10 +42,10 @@
                     
 
                 <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-category">{{ __('SKU') }}</label>
+                  <label class="col-sm-2 col-form-label" id="input-sku">{{ __('SKU') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group">
-                      <input class="form-control" name="product_sku" for="input-category" type="text"/>
+                      <input class="form-control" name="product_sku" for="input-sku" type="text"/>
                     </div>
                   </div>
                 </div>
@@ -74,52 +74,54 @@
                 </div>
                 
                 <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-wholesale_price">{{ __('Channel Name') }}</label>
+                  <label class="col-sm-2 col-form-label" id="input-channel_name">{{ __('Channel Name') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group">
-                      <input class="form-control" name="channel_name" for="input-wholesale_price" type="text"/>
+                      <input class="form-control" name="channel_name" for="input-channel_name" type="text"/>
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-product_price">{{ __('City') }}</label>
+                  <label class="col-sm-2 col-form-label" id="input-city">{{ __('City') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group">
                       
-                      <select class="form-control text-uppercase" name="channel_city" id="city_id_" data-selected="">
+                      <!-- <select class="form-control text-uppercase" name="channel_city" id="city_id_" data-selected="">
                         @foreach($data_city as $c)
                         <option value="{{ $c->name }}">{{ $c->name }}</option>
                         @endforeach
-                      </select>
+                      </select> -->
+
+                      <input class="form-control" name="post_url" for="input-city" type="text"/>
                       
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-discount">{{ __('URL') }}</label>
+                  <label class="col-sm-2 col-form-label" id="input-url">{{ __('URL') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group">
-                      <input class="form-control" name="post_url" for="input-discount" type="text"/>
+                      <input class="form-control" name="post_url" for="input-url" type="text"/>
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-discount">{{ __('Title') }}</label>
+                  <label class="col-sm-2 col-form-label" id="input-title">{{ __('Title') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group">
-                      <input class="form-control" name="post_title" for="input-discount" type="text"/>
+                      <input class="form-control" name="post_title" for="input-title" type="text"/>
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-discount">{{ __('Price') }}</label>
+                  <label class="col-sm-2 col-form-label" id="input-price">{{ __('Price') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group">
-                      <input class="form-control" name="price" for="input-discount" type="text"/>
+                      <input class="form-control" name="price" for="input-price" type="text"/>
                     </div>
                   </div>
                 </div>
@@ -137,7 +139,7 @@
                 </div>
 
                 <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-productimage">{{ __('Image') }}</label>
+                  <label class="col-sm-2 col-form-label" id="input-productimages">{{ __('Image') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group">
                       <label for="input-productimages">Example file input</label>
