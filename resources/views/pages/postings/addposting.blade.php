@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-md-10">
           <form method="post" action="{{ route('posting.store') }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">
-            @csrf
+            {{ csrf_field() }}
 
             <div class="card ">
               <div class="card-header card-header-primary">
@@ -93,7 +93,7 @@
                         @endforeach
                       </select> -->
 
-                      <input class="form-control" name="post_url" for="input-city" type="text"/>
+                      <input class="form-control" name="channel_city" for="input-city" type="text"/>
                       
                     </div>
                   </div>
@@ -141,10 +141,17 @@
                 <div class="row">
                   <label class="col-sm-2 col-form-label" id="input-productimages">{{ __('Image') }}</label>
                   <div class="col-sm-7">
-                    <div class="form-group">
-                      <label for="input-productimages">Example file input</label>
-                      <input type="file" class="form-control-file" name="photo" id="input-productimages">
-                    </div>
+                     <div class="form-group form-file-upload form-file-multiple">
+                        <input type="file" multiple="" class="inputFileHidden" name="photo">
+                          <div class="input-group">
+                            <input type="text" class="form-control inputFileVisible" placeholder="Upload Image">
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-fab btn-round btn-primary">
+                                <i class="material-icons">attach_file</i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
                   </div>
                 </div>
 
@@ -158,3 +165,5 @@
     </div>
   </div>
 @endsection
+
+
