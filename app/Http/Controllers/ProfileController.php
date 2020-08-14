@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Gate;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
-use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -41,6 +43,6 @@ class ProfileController extends Controller
     {
         auth()->user()->update(['password' => Hash::make($request->get('password'))]);
 
-        return back()->withStatusPassword(__('Password successfully updated.'));
+        return back()->withPasswordStatus(__('Password successfully updated.'));
     }
 }

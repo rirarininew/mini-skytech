@@ -1,54 +1,59 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'email', 'title' => __('Back to Login')])
+@extends('layouts.app', [
+    'namePage' => 'Reset Password',
+    'class' => 'login-page sidebar-mini ',
+    'activePage' => '',
+    'backgroundImage' => asset('assets') . "/img/bg14.jpg",
+])
 
 @section('content')
-<div class="container" style="height: auto;">
-  <div class="row align-items-center">
-    <div class="col-md-9 ml-auto mr-auto mb-3 text-center">
-      <br><br><br>
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-      <form class="form" method="POST" action="{{ route('password.email') }}">
-        @csrf
-
-        <div class="card card-login card-hidden mb-3">
-          <div class="card-header card-header-primary text-center">
-            <h4 class="card-title"><strong>{{ __('Forgot Password') }}</strong></h4>
-          </div>
-          <div class="card-body">
-            @if (session('status'))
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <i class="material-icons">close</i>
-                    </button>
-                    <span>{{ session('status') }}</span>
-                  </div>
-                </div>
-              </div>
-            @endif
-            <div class="bmd-form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="material-icons">email</i>
-                  </span>
-                </div>
-                <input type="email" name="email" class="form-control" placeholder="{{ __('Email...') }}" value="{{ old('email') }}" required>
-              </div>
-              @if ($errors->has('email'))
-                <div id="email-error" class="error text-danger pl-3" for="email" style="display: block;">
-                  <strong>{{ $errors->first('email') }}</strong>
-                </div>
-              @endif
+    <div class="content">
+        <div class="container">
+            <div class="col-md-4 ml-auto mr-auto">
+                <form role="form" method="POST" action="{{ route('password.email') }}">
+                    @csrf
+                    <div class="card card-login card-plain">
+                        <div class="card-header ">
+                            <div class="logo-container">
+                                <img src="{{ asset('assets/img/vernon-logo.png') }}" alt="">
+                            </div>
+                        </div>
+                        <div class="card-body ">
+                            <div class="card-body">
+                                @if (session('status'))
+                                    <div class="alert alert-success" role="alert">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="input-group no-border form-control-lg {{ $errors->has('email') ? ' has-danger' : '' }}">
+                                <span class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="now-ui-icons users_circle-08"></i>
+                                    </div>
+                                </span>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            </div>
+                            @error('email')
+                                <span style="display:block;" class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="card-footer ">
+                            <button  type = "submit" class="btn btn-primary btn-round btn-lg btn-block mb-3">{{ __('Send Password Reset Link') }}</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
-          <div class="card-footer justify-content-center">
-            <button type="submit" class="btn btn-primary btn-link btn-lg">{{ __('Send Password Reset Link') }}</button>
-          </div>
         </div>
-      </form>
     </div>
-  </div>
-</div>
 @endsection
+
+
+@push('js')
+<script>
+    $(document).ready(function() {
+      demo.checkFullPageBackgroundImage();
+    });
+  </script>
+@endpush

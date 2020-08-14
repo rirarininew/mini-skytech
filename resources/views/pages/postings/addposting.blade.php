@@ -1,20 +1,22 @@
-@extends('layouts.app', ['activePage' => 'posting', 'titlePage' => __('Add Post')])
+@extends('layouts.app', [
+    'class' => 'sidebar-mini ',
+    'namePage' => 'Manage Posting',
+    'activePage' => 'posting',
+    'activeNav' => '',
+])
 
 @section('content')
+  <div class="panel-header panel-header-sm">
+  </div>
   <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-10">
-          <form method="post" action="{{ route('posting.store') }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">
-            {{ csrf_field() }}
-
-            <div class="card ">
-              <div class="card-header card-header-primary">
-                <h4 class="card-title">{{ __('Add Post') }}</h4>
-                <!-- <p class="card-category">{{ __('User information') }}</p> -->
-              </div>
-              <div class="card-body ">
-                @if (session('status'))
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">{{__(" Add Posting")}}</h5>
+          </div>
+          <div class="card-body">
+            @if (session('status'))
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="alert alert-primary">
@@ -37,133 +39,118 @@
                 </div>
                 @endif
 
-                
-                <input class="form-control" name="user_id" type="text" value="{{ Auth::user()->id }}" hidden/>
-                    
+            <form method="post" action="{{ route('posting.store') }}" autocomplete="off" enctype="multipart/form-data">
+              {{ csrf_field() }}
 
-                <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-sku">{{ __('SKU') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <input class="form-control" name="product_sku" for="input-sku" type="text"/>
-                    </div>
+              <input class="form-control" name="user_id" type="text" value="{{ Auth::user()->id }}" hidden/>
+
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__(" SKU")}}</label>
+                    <input class="form-control" name="product_sku" type="text">
                   </div>
                 </div>
-
-                <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-product_name">{{ __('Product Name') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <input class="form-control" name="product_name" for="input-product_name" type="text"/>
-                    </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__(" Product Name")}}</label>
+                    <input class="form-control" name="product_name" type="text">
                   </div>
                 </div>
+                <div class="col-md-2"></div>
+              </div>
 
-                <div class="row">
-                  <label class="col-sm-2 col-form-label">{{ __('Channel Type') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__(" Channel Type")}}</label>
                       <select class="form-control" name="channel_type">
                         <option value="lazada">Lazada</option>
                         <option value="tokopedia">Tokopedia</option>
+                        <option value="shopee">Shopee</option>
+                        <option value="olx">OLX</option>
+                        <option value="bukalapak">Bukalapak</option>
                         <option value="facebook marketplace">Facebook Marketplace</option>
                         <option value="forum">Forum</option>
                       </select>
-                    </div>
                   </div>
                 </div>
-                
-                <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-channel_name">{{ __('Channel Name') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <input class="form-control" name="channel_name" for="input-channel_name" type="text"/>
-                    </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__(" Channel Name")}}</label>
+                    <input class="form-control" name="channel_name" type="text">
                   </div>
                 </div>
+                <div class="col-md-2"></div>
+              </div>
 
-                <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-city">{{ __('City') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      
-                      <!-- <select class="form-control text-uppercase" name="channel_city" id="city_id_" data-selected="">
-                        @foreach($data_city as $c)
-                        <option value="{{ $c->name }}">{{ $c->name }}</option>
-                        @endforeach
-                      </select> -->
-
-                      <input class="form-control" name="channel_city" for="input-city" type="text"/>
-                      
-                    </div>
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__(" City")}}</label>
+                    <input class="form-control" name="channel_city" type="text">
                   </div>
                 </div>
-
-                <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-url">{{ __('URL') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <input class="form-control" name="post_url" for="input-url" type="text"/>
-                    </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__(" URL")}}</label>
+                    <input class="form-control" name="post_url" type="text">
                   </div>
                 </div>
+                <div class="col-md-2"></div>
+              </div>
 
-                <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-title">{{ __('Title') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <input class="form-control" name="post_title" for="input-title" type="text"/>
-                    </div>
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__(" Title")}}</label>
+                    <input class="form-control" name="post_title" type="text">
                   </div>
                 </div>
-
-                <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-price">{{ __('Price') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <input class="form-control" name="price" for="input-price" type="text"/>
-                    </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__(" Price")}}</label>
+                    <input class="form-control" name="price" type="text">
                   </div>
                 </div>
+                <div class="col-md-2"></div>
+              </div>
 
-                <div class="row">
-                  <label class="col-sm-2 col-form-label">{{ __('Status') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <select class="form-control" name="status">
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__(" Image")}}</label><br>
+                    <input type="file" class="form-control-file" id="profile-img" name="photo">
+                    <img src="/image/plus-icon.png" width="80px" height="80px" for="profile-img">
+                    <img src="" id="profile-img-tag" width="200px" />
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                  <label>{{__(" status")}}</label><br>
+                    <select class="form-control" name="status">
                         <option value="new">New</option>
                         <option value="renew">Renew</option>
                       </select>
-                    </div>
                   </div>
                 </div>
-
-                <div class="row">
-                  <label class="col-sm-2 col-form-label" id="input-productimages">{{ __('Image') }}</label>
-                  <div class="col-sm-7">
-                     <div class="form-group form-file-upload form-file-multiple">
-                        <input type="file" multiple="" class="inputFileHidden" name="photo">
-                          <div class="input-group">
-                            <input type="text" class="form-control inputFileVisible" placeholder="Upload Image">
-                            <span class="input-group-btn">
-                              <button type="button" class="btn btn-fab btn-round btn-primary">
-                                <i class="material-icons">attach_file</i>
-                              </button>
-                            </span>
-                          </div>
-                        </div>
-                  </div>
-                </div>
-
-              <div class="card-footer ml-auto mr-auto">
-                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                <div class="col-md-2"></div>
               </div>
+              
+            <div class="card-footer text-center">
+              <button type="Submit" class="btn btn-primary btn-round ">{{__('Submit')}}</button> 
             </div>
           </form>
         </div>
       </div>
     </div>
+    </div>
   </div>
 @endsection
 
-
+ 

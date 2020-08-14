@@ -1,20 +1,29 @@
-@extends('layouts.app', ['activePage' => 'posting', 'titlePage' => __('Detail Post')])
+@extends('layouts.app', [
+    'class' => 'sidebar-mini ',
+    'namePage' => 'Manage Posting',
+    'activePage' => 'posting',
+    'activeNav' => '',
+])
 
 @section('content')
+  <div class="panel-header panel-header-sm">
+  </div>
   <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <form method="post" action="{{ route('posting.update', $Post->post_id) }}" autocomplete="off" class="form-horizontal">
-            @csrf
-            @method('put')
-
-            <div class="card ">
-              <div class="card-header card-header-primary">
-                <h4 class="card-title">{{ __('Detail Post') }}</h4>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">{{__(" Details Posting")}}</h5>
+            
+            <div class="row">
+              <div class="col-md-12">
+                <a type="button" class="btn btn-danger btn-round float-right" href="{{ route('posting.delete', $Post->post_id)}}">{{__('delete')}}</a>
+                <a type="button" class="btn btn-success btn-round float-right" href="{{ route('posting.edit', $Post->post_id)}}">{{__('edit')}}</a>
               </div>
-              <div class="card-body ">
-                @if (session('status'))
+            </div>
+          </div>
+          <div class="card-body">
+            @if (session('status'))
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="alert alert-success">
@@ -36,14 +45,14 @@
                   </ul>
                 </div>
                 @endif
-
-                
-                <div class="row">
+              
+                  <div class="row">
                   <div class="col-md-4">
+                    
                     <img width="400px" src="{{ url('/data_image/'.$Post->photo) }}">
+                    
                   </div>
                   <div class="col-md-1">
-                    
                   </div>
                   <div class="col-md-6">
                     <div class="row" style="padding-top:1.5rem">
@@ -86,19 +95,26 @@
                       <div class="col-md-3"><label>{{ __('Status') }}</label></div>
                       <div class="col-md-9"><label">{{ $Post->status }}</label></div>
                     </div>
+                    <div class="row">
+                      <div class="col-md-3"><label>{{ __('Posted By') }}</label></div>
+                      <div class="col-md-9"><label">{{ $Uname }}</label></div>
+                    </div>
                   </div>
                   <div class="col-md-1">
-                    
-                  </div>
                 </div>
-                
-              <div class="card-footer">
-                <a type="button" href="{{ route('posting.index') }}" class="btn btn-primary">{{ __('Back') }}</a>
-              </div>
+              
+            <div class="card-footer text-center">
+              <a type="button" class="btn btn-primary btn-round " href="{{ route('posting.index') }}">{{__('Back')}}</a>
             </div>
-          </form>
+          
         </div>
       </div>
     </div>
+
+    </div>
   </div>
+@endsection
+
+@section('js')
+
 @endsection

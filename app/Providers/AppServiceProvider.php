@@ -2,9 +2,8 @@
 
 namespace App\Providers;
 
-use ConsoleTVs\Charts\Registrar as Charts;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
+use ConsoleTVs\Charts\Registrar as Charts;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +28,5 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\SampleChart::class,
             \App\Charts\UserChart::class
         ]);
-        Schema::defaultStringLength(150);
     }
 }
