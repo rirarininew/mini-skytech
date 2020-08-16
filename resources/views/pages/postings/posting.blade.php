@@ -66,7 +66,7 @@
                     
                   </td>
                   <td>
-                    <a type="button" class="btn btn-secondary btn-round text-white pull-right" href="{{ route('posting.index') }}">refresh</a>
+                    <a type="button" class="btn btn-success btn-round text-white pull-right" href="{{ route('posting.index') }}">refresh</a>
                     </form>
                   </td>
                 </tr>

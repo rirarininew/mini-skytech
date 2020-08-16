@@ -159,6 +159,12 @@ class PostingController extends Controller
         $data_posting = DB::table('posting')
         ->where('user_id','like',"%".$cariuser."%")
         ->paginate();
+
+        $nama_user = User::all();
+        $Uname;
+        foreach($nama_user as $username){
+            $Uname  = $username->name;
+        }
  
         return view('pages.postings.user',['data_posting' => $data_posting]);
     }
