@@ -115,6 +115,7 @@
               </div>
             <div class="card-footer">
               <button type="submit" class="btn btn-primary btn-round btn-lg">{{__('Submit')}}</button>
+              <a type="button" class="btn btn-secondary btn-round btn-lg" href="{{ route('home') }}">{{__('Cancel')}}</a>
             </div>
           </form>
         </div>

@@ -17,8 +17,8 @@
             
             <div class="row">
               <div class="col-md-12">
-                <a type="button" class="btn btn-danger btn-round float-right" href="{{ route('posting.delete', $Post->post_id)}}">{{__('delete')}}</a>
-                <a type="button" class="btn btn-success btn-round float-right" href="{{ route('posting.edit', $Post->post_id)}}">{{__('edit')}}</a>
+                <a type="button" class="btn btn-secondary btn-round float-right" href="{{ route('posting.delete', $Post->post_id)}}" style="margin-right:.5rem">{{__('delete')}}</a>
+                <a type="button" class="btn btn-success btn-round float-right" href="{{ route('posting.edit', $Post->post_id)}}" style="margin-right:.3rem">{{__('edit')}}</a>
               </div>
             </div>
           </div>
@@ -47,13 +47,13 @@
                 @endif
               
                   <div class="row">
+                  <div class="col-md-1"></div>
                   <div class="col-md-4">
                     
-                    <img width="400px" src="{{ url('/data_image/'.$Post->photo) }}">
+                    <img width="300px" height="300px" src="{{ url('/data_image/'.$Post->photo) }}">
                     
                   </div>
-                  <div class="col-md-1">
-                  </div>
+                  
                   <div class="col-md-6">
                     <div class="row" style="padding-top:1.5rem">
                       <div class="col-md-3"><label>{{ __('ID') }}</label></div>

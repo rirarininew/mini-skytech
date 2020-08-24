@@ -12,6 +12,13 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
+          <form method="post" action="{{ route('posting.update', $Post->post_id) }}" autocomplete="off" enctype="multipart/form-data">
+              {{ csrf_field() }}
+              @method('put')
+
+          <button type="Submit" class="btn btn-primary btn-round float-right" style="margin-right:1rem;margin-top:1rem">{{__('Save Changes')}}</button>
+           <a type="button" class="btn btn-secondary btn-round float-right" style="margin-right:.5rem;margin-top:1rem" href="{{ route('posting.index') }}">{{__('Cancel')}}</a>
+
           <div class="card-header">
             <h5 class="title">{{__(" Update Posting")}}</h5>
           </div>
@@ -38,112 +45,107 @@
                   </ul>
                 </div>
                 @endif
-
-            <form method="post" action="{{ route('posting.update', $Post->post_id) }}" autocomplete="off" enctype="multipart/form-data">
-              {{ csrf_field() }}
-              @method('put')
+            
 
               <input class="form-control" name="post_id" value="{{ $Post->post_id }}" hidden="" />
               <input class="form-control" name="user_id" type="text" value="{{ $Post->user_id }}" hidden/>
+              <input class="form-control" name="status" type="text" value="{{ $Post->status }}" hidden/>
 
               <div class="row">
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
-                    <label>{{__(" SKU")}}</label>
+                    <label>{{__("Product SKU")}}</label>
                     <input class="form-control" name="product_sku" type="text" value="{{ $Post->product_sku }}">
                   </div>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__(" Channel Type")}}</label>
+                      <select class="form-control" name="channel_type">
+                        <option selected="{{ $Post->channel_type }}">{{ $Post->channel_type }}</option>
+                        <option value="lazada">Lazada</option>
+                        <option value="tokopedia">Tokopedia</option>
+                        <option value="shopee">Shopee</option>
+                        <option value="olx">OLX</option>
+                        <option value="bukalapak">Bukalapak</option>
+                        <option value="facebook marketplace">Facebook Marketplace</option>
+                        <option value="forum">Forum</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="col-md-3"></div>
+              </div>
+
+              <div class="row">
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
                     <label>{{__(" Product Name")}}</label>
                     <input class="form-control" name="product_name" type="text" value="{{ $Post->product_name }}">
                   </div>
                 </div>
-                <div class="col-md-2"></div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-4 pr-1">
-                  <div class="form-group">
-                    <label>{{__(" Channel Type")}}</label>
-                      <select class="form-control" name="channel_type">
-                        <option selected="">{{ $Post->channel_type }}</option>
-                        <option value="lazada">Lazada</option>
-                        <option value="tokopedia">Tokopedia</option>
-                        <option value="facebook marketplace">Facebook Marketplace</option>
-                        <option value="forum">Forum</option>
-                      </select>
-                  </div>
-                </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
                     <label>{{__(" Channel Name")}}</label>
                     <input class="form-control" name="channel_name" type="text" value="{{ $Post->channel_name }}">
                   </div>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-3"></div>
               </div>
 
               <div class="row">
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
-                    <label>{{__(" City")}}</label>
-                    <input class="form-control" name="channel_city" type="text" value="{{ $Post->channel_city }}">
-                  </div>
-                </div>
-                <div class="col-md-2"></div>
-                <div class="col-md-4 pr-1">
-                  <div class="form-group">
-                    <label>{{__(" URL")}}</label>
-                    <input class="form-control" name="post_url" type="text" value="{{ $Post->post_url }}">
-                  </div>
-                </div>
-                <div class="col-md-2"></div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-4 pr-1">
-                  <div class="form-group">
-                    <label>{{__(" Title")}}</label>
-                    <input class="form-control" name="post_title" type="text" value="{{ $Post->post_title }}">
-                  </div>
-                </div>
-                <div class="col-md-2"></div>
-                <div class="col-md-4 pr-1">
-                  <div class="form-group">
-                    <label>{{__(" Price")}}</label>
+                    <label>{{__("Product Price")}}</label>
                     <input class="form-control" name="price" type="text" value="{{ $Post->price }}">
                   </div>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__("Channel City")}}</label>
+                    <input class="form-control" name="channel_city" type="text" value="{{ $Post->channel_city }}">
+                  </div>
+                </div>
+                <div class="col-md-3"></div>
               </div>
 
               <div class="row">
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
-                    <label>{{__(" Image")}}</label><br>
-                    <img src="{{ url('/data_image/'.$Post->photo) }}" for="profile-img" width="200px" />
-                    <input type="file" class="form-control-file" id="profile-img" name="photo" value="{{ $Post->photo }}">
+                    <label>{{__("Product Image")}}</label><br>
+                    <div class="form-group">
+                      <input type="file" class="form-control-file" id="profile-img" name="photo" value="{{ $Post->photo }}">
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
-                  <label>{{__(" status")}}</label><br>
-                    <select class="form-control" name="status">
-                        <option selected="">{{ $Post->status }}</option>
-                        <option value="new">New</option>
-                        <option value="renew">Renew</option>
-                      </select>
+                    <label>{{__("Post Title")}}</label>
+                    <input class="form-control" name="post_title" type="text" value="{{ $Post->post_title }}">
                   </div>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-3"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <img src="{{ url('/data_image/'.$Post->photo) }}" for="profile-img" width="200px" height="200px" />
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>{{__("Post URL")}}</label>
+                    <input class="form-control" name="post_url" type="text" value="{{ $Post->post_url }}">
+                  </div>
+                </div>
+                <div class="col-md-3"></div>
               </div>
               
-            <div class="card-footer text-center">
-              <button type="Submit" class="btn btn-primary btn-round ">{{__('Submit')}}</button> 
+            <div class="card-footer text-right">
+              
             </div>
           </form>
         </div>

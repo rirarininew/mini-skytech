@@ -36,7 +36,6 @@ class UserController extends Controller
 
     public function update(Request $request, $Post)
     {
-
         User::where('id', $Post)->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -51,9 +50,11 @@ class UserController extends Controller
         return view ('users.edituser', compact('Post'));
     }
 
-    public function delete($id)
+    public function status(Request $request, $Post)
     {
-        DB::table('users')->where('id',$id)->delete();
-        return redirect('home/user');
+        User::where('id', $Post)->update([
+            'status' => $request->status,
+        ]);
+        return redirect()->back();
     }
 }

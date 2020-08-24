@@ -7,32 +7,52 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Posting;
 use App\User;
-// use App\City;
 
 
 class PostingController extends Controller
 {
     public function index()
     {
+        $data_user = User::all();
     	$data_posting = Posting::all();
-        // $data_city = City::all();
-        return view ('pages.postings.posting', compact('data_posting'));
+
+        return view ('pages.postings.posting', compact('data_posting','data_user'));
+    }
+
+    public function produklaris()
+    {
+        // $data_sku = Posting::orderBy('product_sku', 'desc')->take(3)->get();
+
+        // $tmp = Posting::where('product_sku','456def')->count();
+
+        return view ('pages.postings.sku', compact('tmp'));
     }
 
     public function create()
     {
-        // $data_city = City::all();
-        return view ('pages.postings.addposting');
+        $data_status = Posting::all();
+        return view ('pages.postings.addposting', compact('data_status'));
     }
 
 
     public function store(Request $request)
     {
+        // UPLOAD PHOTO
        $file = $request->file('photo');
        $tujuan_upload = 'data_image';
        $nama_file = time()."_".$file->getClientOriginalName();
        $file->move($tujuan_upload,$nama_file);
 
+       // FILTER STATUS
+       $cari_status = $request->post_url;
+
+        if( Posting::where('post_url', $cari_status)->first() != null ){ 
+            $status = 'renew';
+        } else{
+            $status = 'new';
+        }
+
+        // INSERT DATA
        Posting::create([
             'product_sku' => $request->product_sku,
             'product_name' => $request->product_name,
@@ -42,7 +62,7 @@ class PostingController extends Controller
             'post_url' => $request->post_url,
             'post_title' => $request->post_title,
             'price' => $request->price,
-            'status' => $request->status,
+            'status' => $status,
             'photo' => $nama_file,
             'user_id' => $request->user_id,
         ]);
@@ -53,7 +73,6 @@ class PostingController extends Controller
 
     public function edit(Posting $Post)
     {
-        // $data_city = City::all();
         return view ('pages.postings.editposting', compact('Post'));
     }
 
@@ -104,69 +123,27 @@ class PostingController extends Controller
 
     public function delete($id)
     {
-		DB::table('posting')->where('post_id',$id)->delete();
-		return redirect('home/posting');
+        Posting::find($id)->delete();
+        return redirect(route('posting.index'))->with('Success', 'Data Deleted');
 	}
 
     public function cari(Request $request)
     {
-        $cari = $request->cari;
- 
-        $data_posting = DB::table('posting')
-        ->where('status','like',$cari)
-        ->paginate();
- 
-        return view('pages.postings.posting',['data_posting' => $data_posting]);
-    }
+        $created_at = $request->created_at;
+        $status = $request->status;
+        $product_sku = $request->product_sku;
+        $user_id = $request->user_id;
 
-    public function caritgl(Request $request)
-    {
-        $caritgl = $request->caritgl;
- 
         $data_posting = DB::table('posting')
-        ->where('created_at','like',"%".$caritgl."%")
-        ->paginate();
- 
-        return view('pages.postings.posting',['data_posting' => $data_posting]);
-    }
+                        ->where('status','like',$status)
+                        ->where('created_at','like',"%".$created_at."%")
+                        ->where('product_sku','like',$product_sku)
+                        ->where('user_id','like',$user_id)
+                        ->paginate();
 
-    public function carisku(Request $request)
-    {
-        $carisku = $request->carisku;
- 
-        $data_posting = DB::table('posting')
-        ->where('product_sku','like',"%".$carisku."%")
-        ->paginate();
- 
-        return view('pages.postings.sku',['data_posting' => $data_posting]);
-    }
+        $data_user = User::all();
 
-    public function carichannel(Request $request)
-    {
-        $carichannel = $request->carichannel;
- 
-        $data_posting = DB::table('posting')
-        ->where('channel_type','like',"%".$carichannel."%")
-        ->paginate();
- 
-        return view('pages.postings.channel',['data_posting' => $data_posting]);
-    }
-
-    public function cariuser(Request $request)
-    {
-        $cariuser = $request->cariuser;
- 
-        $data_posting = DB::table('posting')
-        ->where('user_id','like',"%".$cariuser."%")
-        ->paginate();
-
-        $nama_user = User::all();
-        $Uname;
-        foreach($nama_user as $username){
-            $Uname  = $username->name;
-        }
- 
-        return view('pages.postings.user',['data_posting' => $data_posting]);
+        return view ('pages.postings.posting', compact('data_posting','data_user'));
     }
 
     public function detail(Posting $Post)

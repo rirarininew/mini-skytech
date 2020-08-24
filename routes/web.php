@@ -43,9 +43,6 @@ Route::get('/stock/detailstock', 'StockController@detail')->name('stock.detail')
 // POSTING ROUTE
 
 	Route::get('/home/posting', 'PostingController@index')->name('posting.index');
-	Route::get('/home/postingbysku', 'PostingController@carisku')->name('posting.carisku');
-	Route::get('/home/postingbychannel', 'PostingController@carichannel')->name('posting.carichannel');
-	Route::get('/home/postingbyuser', 'PostingController@cariuser')->name('posting.cariuser');
 	
 
 	Route::post('posting/storeposting', 'PostingController@store')->name ('posting.store');
@@ -57,7 +54,8 @@ Route::get('/stock/detailstock', 'StockController@detail')->name('stock.detail')
 	Route::put('posting/postingupdateImage/{Post}', 'PostingController@updateImage')->name ('posting.updateimage');
 	Route::get('posting/deleteposting/{id}','PostingController@delete')->name ('posting.delete');
 	Route::get('posting/cariposting', 'PostingController@cari')->name ('posting.cari');
-	Route::get('posting/caripostingtgl', 'PostingController@caritgl')->name ('posting.caritgl');
+
+	// Route::get('/home', 'PostingController@produklaris')->name('posting.produklaris');
 
 // USER ROUTE
 
@@ -66,4 +64,4 @@ Route::get('/stock/detailstock', 'StockController@detail')->name('stock.detail')
 	Route::post('user/storeuser', 'UserController@store')->name ('user.store');
 	Route::put('user/userupdate/{Post}', 'UserController@update')->name ('user.update');
 	Route::get('user/edituser/{Post}/edit', 'UserController@edit')->name ('user.edit');
-	Route::get('user/deleteuser/{id}','UserController@delete')->name ('user.delete');
+	Route::put('user/disableuser/{Post}','UserController@status')->name ('user.status');

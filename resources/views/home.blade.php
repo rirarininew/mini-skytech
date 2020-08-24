@@ -8,19 +8,111 @@
 @section('content')
   <div class="panel-header panel-header-sm">
   </div>
-  <div class="content">
-    <div class="row">
-    <div class="container">
-    <h1 style="margin-top:5rem">Posting by date </h1>
-      <div id="chart" style="height: 300px;"></div>
-    <h1>Posting by user</h1>
-      <div id="chartuser" style="height: 300px;"></div>
-      <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
-      <!-- Chartisan -->
-      <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
-    <
+    <div class="content">
+      <div class="row">
+        <div class="container">
+          <h1 style="margin-top:5rem">Posting by date </h1>
+            <div id="chart" style="height: 300px;"></div>
+        <!-- <h1>Posting by user</h1>
+            <div id="chartuser" style="height: 300px;"></div> -->
+          
+            <!-- Chartisan -->
+            <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+            <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Popular Product</h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      Product SKU
+                    </th>
+                    <th>
+                      Total Posting
+                    </th>
+                    <th>
+                      USER ID
+                    </th>
+                  </thead>
+                  @foreach($data_sku as $sku)
+                  <tbody>
+                    <tr>
+                      <td>
+                        {{ $sku->product_sku }}
+                      </td>
+                      <td>
+                        {{ $sku->total_posting }} Post
+                      </td>
+                      <td>
+                        {{ $sku->user_id }}
+                      </td>
+                    </tr>
+                  </tbody>
+                  @endforeach
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Posting By User</h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      USER ID
+                    </th>
+                    <th>
+                      POSTING (NEW)
+                    </th>
+                    <th>
+                      POSTING (RENEW)
+                    </th>
+                  </thead>
+                  @foreach($data_posting as $a)
+                  <tbody>
+                    <tr>
+                      <td>
+                        {{ $a->user_id }}
+                      </td>
+                      <td>
+                        {{ $a->total_status_new }} New
+                      </td>
+                      <td>
+                        {{ $a->total_status_renew }} Renew
+                      </td>
+                    </tr>
+                  </tbody>
+                  @endforeach
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
     </div>
-  </div>
+
+  
     <!-- <div class="row">
       <div class="col-lg-4">
         <div class="card card-chart">
@@ -281,7 +373,7 @@
         </div>
       </div>
     </div> -->
-  </div>
+  
 @endsection
 
 @push('js')

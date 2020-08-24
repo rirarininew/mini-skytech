@@ -17,7 +17,26 @@
             <h5 class="title">{{__(" Edit User")}}</h5>
             <div class="row">
               <div class="col-md-12">
-                <a type="button" class="btn btn-danger btn-round float-right" href="{{ route('user.delete', $Post->id)}}">{{__('delete')}}</a>
+                
+                @if($Post->id != 1)
+                <form method="POST" action="{{ route('user.status', $Post->id) }}">
+                @csrf
+                @method('put')
+
+                  @if($Post->status == 1)
+                  <input type="text" name="status" value="0" hidden>
+                  @elseif($Post->status == 0)
+                  <input type="text" name="status" value="1" hidden>
+                  @endif
+
+                  @if($Post->status == 0)
+                  <button type="submit" class="btn btn-secondary btn-round float-right">{{__('inactive')}}</button>
+                  @elseif($Post->status == 1)
+                  <button type="submit" class="btn btn-primary btn-round float-right">{{__('active')}}</button>
+                  @endif
+                </form>
+                @endif
+
               </div>
             </div>
           </div>
